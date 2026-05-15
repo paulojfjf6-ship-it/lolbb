@@ -1,0 +1,107 @@
+--// LocalScript GUI Música Roblox
+
+local player = game.Players.LocalPlayer
+
+local gui = Instance.new("ScreenGui")
+gui.Parent = player:WaitForChild("PlayerGui")
+gui.Name = "MusicPanel"
+
+-- Frame principal
+local frame = Instance.new("Frame")
+frame.Parent = gui
+frame.Size = UDim2.new(0, 380, 0, 300)
+frame.Position = UDim2.new(0.5, -190, 0.5, -150)
+frame.BackgroundColor3 = Color3.fromRGB(25,25,25)
+frame.BorderSizePixel = 0
+
+-- Imagem
+local image = Instance.new("ImageLabel")
+image.Parent = frame
+image.Size = UDim2.new(1, 0, 0.7, 0)
+image.BackgroundTransparency = 1
+
+-- ID DA IMAGEM
+image.Image = "rbxassetid://SEU_ID_DA_IMAGEM"
+
+-- Música
+local sound = Instance.new("Sound")
+sound.Parent = frame
+
+-- ID DA MÚSICA
+sound.SoundId = "rbxassetid://ID_DA_MUSICA"
+
+sound.Volume = 2
+sound.Looped = true
+
+-- Play
+local play = Instance.new("TextButton")
+play.Parent = frame
+play.Size = UDim2.new(0.22,0,0.12,0)
+play.Position = UDim2.new(0.02,0,0.75,0)
+play.Text = "Play"
+play.TextScaled = true
+play.BackgroundColor3 = Color3.fromRGB(0,170,0)
+play.TextColor3 = Color3.new(1,1,1)
+
+-- Pause
+local pause = Instance.new("TextButton")
+pause.Parent = frame
+pause.Size = UDim2.new(0.22,0,0.12,0)
+pause.Position = UDim2.new(0.26,0,0.75,0)
+pause.Text = "Pause"
+pause.TextScaled = true
+pause.BackgroundColor3 = Color3.fromRGB(170,0,0)
+pause.TextColor3 = Color3.new(1,1,1)
+
+-- Volume +
+local plus = Instance.new("TextButton")
+plus.Parent = frame
+plus.Size = UDim2.new(0.22,0,0.12,0)
+plus.Position = UDim2.new(0.50,0,0.75,0)
+plus.Text = "Volume +"
+plus.TextScaled = true
+plus.BackgroundColor3 = Color3.fromRGB(0,120,255)
+plus.TextColor3 = Color3.new(1,1,1)
+
+-- Volume -
+local minus = Instance.new("TextButton")
+minus.Parent = frame
+minus.Size = UDim2.new(0.22,0,0.12,0)
+minus.Position = UDim2.new(0.74,0,0.75,0)
+minus.Text = "Volume -"
+minus.TextScaled = true
+minus.BackgroundColor3 = Color3.fromRGB(80,80,80)
+minus.TextColor3 = Color3.new(1,1,1)
+
+-- Texto Volume
+local volumeText = Instance.new("TextLabel")
+volumeText.Parent = frame
+volumeText.Size = UDim2.new(1,0,0.08,0)
+volumeText.Position = UDim2.new(0,0,0.90,0)
+volumeText.BackgroundTransparency = 1
+volumeText.TextColor3 = Color3.new(1,1,1)
+volumeText.TextScaled = true
+volumeText.Text = "Volume: "..sound.Volume
+
+-- Funções
+play.MouseButton1Click:Connect(function()
+	sound:Play()
+end)
+
+pause.MouseButton1Click:Connect(function()
+	sound:Pause()
+end)
+
+plus.MouseButton1Click:Connect(function()
+	if sound.Volume < 10 then
+		sound.Volume = sound.Volume + 1
+		volumeText.Text = "Volume: "..sound.Volume
+	end
+end)
+
+minus.MouseButton1Click:Connect(function()
+	if sound.Volume > 0 then
+		sound.Volume = sound.Volume - 1
+		volumeText.Text = "Volume: "..sound.Volume
+	end
+end)
